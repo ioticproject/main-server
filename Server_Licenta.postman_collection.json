@@ -1,0 +1,1801 @@
+openapi: 3.0.0	
+info:	
+  title: Server_Licenta	
+  contact:	
+    name: IoTIC Tean	
+    email: iotic.team@outlook.com	
+  version: 1.0.0	
+  x-codegen-settings:	
+    tryItOutEnabled: True	
+    Nullify404: false	
+    GenerateAsyncCode: true	
+    UseMethodPrefix: false	
+    UseModelPostfix: false	
+    UseControllerPrefix: true	
+    UseEnumPostfix: true	
+    CollectParameters: true	
+    UseConstructorsForConfig: false	
+    UseCommonSDKLibrary: false	
+    iOSUseAppInfoPlist: false	
+    AndroidUseAppManifest: false	
+    BodySerialization: 0	
+    EnableAdditionalModelProperties: false	
+    PreserveParameterOrder: true	
+    AppendContentHeaders: true	
+    iOSGenerateCoreData: false	
+    GenerateInterfaces: false	
+    NodeHttpClient: NODE_REQUEST	
+    ValidateRequiredParameters: false	
+    JavaUsePropertiesConfig: false	
+    Timeout: 1000	
+    StoreTimezoneInformation: false	
+    EnablePHPComposerVersionString: false	
+    EnableLogging: true	
+    ArraySerialization: Indexed	
+    ModelSerializationScheme: Json	
+    UseExceptionPrefix: true	
+    RunscopeEnabled: true	
+    AndroidHttpClient: ANDROID_OK	
+    ObjCHttpClient: UNIREST	
+    CSharpHttpClient: UNIREST	
+    PHPHttpClient: UNIREST	
+    JavaHttpClient: JAVA_OK	
+    ParameterArrayFormat: ParamArrayWithIndex	
+    SecurityProtocols:	
+    - Ssl3	
+    - Tls	
+    GenerateTravisConfig: false	
+    GenerateCircleConfig: false	
+    GenerateAppveyorConfig: false	
+    GenerateJenkinsConfig: false	
+    EnableHttpCache: true	
+    Retries: 0	
+    RetryInterval: 100	
+    GenerateAdvancedDocs: true	
+    UnderscoreNumbers: true	
+    UseSingletonPattern: true	
+    DisableLinting: false	
+    ApplyCustomizations: []	
+    SortResources: false	
+    AllowSkippingSSLCertVerification: false	
+    DoNotSplitWords: []	
+    EnableGlobalUserAgent: true	
+    ReturnCompleteHttpResponse: true	
+    GenerateModels: true	
+    GenerateExceptions: true	
+    IgnoreIfNullJson: false	
+    DisableDocs: false	
+    LiftParameterDescriptionFromCustomType: false	
+    ThrowForHttpErrorStatusCodes: true	
+    ResponseMapping:	
+      Type: Simple	
+    ForceKeywordArgsInRuby: false	
+    SymbolizeHashKeysInRuby: false	
+    UsageExampleEndpoint:	
+      Description: ''	
+      EndpointGroupName: ''	
+      EndpointName: ''	
+    IsLatestVersion: false	
+    EnableImmutableModels: false	
+    GenerateEnums: true	
+    BackoffFactor: 2	
+    StatusCodesToRetry:	
+    - 408	
+    - 413	
+    - 429	
+    - 500	
+    - 502	
+    - 503	
+    - 504	
+    - 521	
+    - 522	
+    - 524	
+    RequestMethodsToRetry:	
+    - GET	
+    - PUT	
+    UserConfigurableRetries: true	
+    UseEndpointMethodName: false	
+    EncodeTemplateParameters: true	
+    GenerateExamplesForOptionalFields: false	
+    MultitargetDotnetVersions: false	
+    BackoffMax: 0	
+    RetryOnTimeout: false	
+  x-server-configuration:	
+    default-environment: production	
+    default-server: Server 1	
+    environments:	
+    - name: production	
+      servers:	
+      - name: Server 1	
+        url: http://18.192.42.42:5000	
+      - name: auth server	
+        url: http://example.com	
+    parameters: []	
+  x-image-uri: ''	
+  description: This documentation describes the REST API used for the IoTIC - Diploma Project.	
+servers:	
+# Added by API Auto Mocking Plugin	
+# Added by API Auto Mocking Plugin	
+- description: SwaggerHub API Auto Mocking	
+  url: https://virtserver.swaggerhub.com/teia/iotic/1.0.0	
+- description: SwaggerHub API Auto Mocking	
+  url: http://virtserver.swaggerhub.com/teia/iotic/1.0.0	
+- description: Running on the Ubuntu Machine...	
+  url: http://18.192.42.42:5000
+paths:
+  /auth:
+    post:
+      tags:
+      - USER
+      summary: auth
+      operationId: auth
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/authrequest'
+            example:
+              username: IoTIC Admin
+              password: '!!new_Password'
+        required: true
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /auth
+          headers:
+            Content-Type: application/json
+          body: >-
+            {
+
+              "username": "IoTIC Admin",
+
+              "password": "!!new_Password"
+
+            }
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: auth
+      x-server-name: Server 1
+  /api/users/login:
+    post:
+      tags:
+      - USER
+      summary: login_user
+      operationId: login_user
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/authrequest'
+            example:
+              username: teiaVAVA
+              password: '!!new_Password'
+        required: true
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /api/users/login
+          headers:
+            Content-Type: application/json
+          body: >-
+            {
+
+              "username": "teiaVAVA",
+
+              "password": "!!new_Password"
+
+            }
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: login_user
+      x-server-name: Server 1
+  /api/users:
+    post:
+      tags:
+      - USER
+      summary: post_user
+      operationId: post_user
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/post_user_request'
+            example:
+              username: teiaaaaVAVA
+              password: '!!new_Password'
+              email: teiaaaavava@yahoo.com
+        required: true
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /api/users
+          headers:
+            Content-Type: application/json
+          body: >-
+            {
+
+              "username": "teiaaaaVAVA",
+
+              "password": "!!new_Password",
+
+              "email": "teiaaaavava@yahoo.com"
+
+            }
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: post_user
+      x-server-name: Server 1
+    get:
+      tags:
+      - USER
+      summary: get_users
+      operationId: get_users
+      parameters: []
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/users
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_users
+      x-server-name: Server 1
+  /api/users/fad3fb47c0c74bf29baa6c7574eb1f70:
+    delete:
+      tags:
+      - USER
+      summary: delete_user_id
+      operationId: delete_user_id
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ3OTA0ODcsImlhdCI6MTYxNDc4Njg4NywibmJmIjoxNjE0Nzg2ODg3LCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.EncbND_ycnHsyyTEZKWiRB5QIfOsyoQjKqX8By58u8w
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /api/users/fad3fb47c0c74bf29baa6c7574eb1f70
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ3OTA0ODcsImlhdCI6MTYxNDc4Njg4NywibmJmIjoxNjE0Nzg2ODg3LCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.EncbND_ycnHsyyTEZKWiRB5QIfOsyoQjKqX8By58u8w
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: delete_user_id
+      x-server-name: Server 1
+  /api/users/68:
+    put:
+      tags:
+      - USER
+      summary: put_user_id
+      operationId: put_user_id
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ3Nzg2MzcsImlhdCI6MTYxNDc3NTAzNywibmJmIjoxNjE0Nzc1MDM3LCJpZGVudGl0eSI6Njh9.l6qDiawkPUqOXOsknL6CUljcKfclkWyxnA2MwC8jiPM
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/put_user_id_request'
+            example:
+              id: 1
+        required: true
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: PUT
+          uri: /api/users/68
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ3Nzg2MzcsImlhdCI6MTYxNDc3NTAzNywibmJmIjoxNjE0Nzc1MDM3LCJpZGVudGl0eSI6Njh9.l6qDiawkPUqOXOsknL6CUljcKfclkWyxnA2MwC8jiPM
+            Content-Type: application/json
+          body: '{"id":"1"}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: put_user_id
+      x-server-name: Server 1
+  /api/users/0b5d8978592048f0898d9c99d989f92f:
+    get:
+      tags:
+      - USER
+      summary: get_user
+      operationId: get_user
+      parameters: []
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_user
+      x-server-name: Server 1
+  /api/devices:
+    get:
+      tags:
+      - DEVICE
+      summary: get_devices
+      operationId: get_devices
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: application/json
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/devices
+          headers:
+            Content-Type: application/json
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_devices
+      x-server-name: Server 1
+  /api/users/0b5d8978592048f0898d9c99d989f92f/devices:
+    post:
+      tags:
+      - DEVICE
+      summary: post_device
+      operationId: post_device
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ5MzY2NzEsImlhdCI6MTYxNDkzMzA3MSwibmJmIjoxNjE0OTMzMDcxLCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.8KJiCKa0C7QA84aB7LNObq7pBzxG9B1tTKcPi0TyOHE
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/post_device_request'
+            example:
+              name: device_6
+              description: description_2
+        required: true
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ5MzY2NzEsImlhdCI6MTYxNDkzMzA3MSwibmJmIjoxNjE0OTMzMDcxLCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.8KJiCKa0C7QA84aB7LNObq7pBzxG9B1tTKcPi0TyOHE
+            Content-Type: application/json
+          body: '{"name":"device_6","description":"description_2"}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: post_device
+      x-server-name: Server 1
+    get:
+      tags:
+      - DEVICE
+      summary: get_user_devices
+      operationId: get_user_devices
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_user_devices
+      x-server-name: Server 1
+  /api/users/0b5d8978592048f0898d9c99d989f92f/devices/2ada58c66fbd4f4984a95fddb61a0b85:
+    delete:
+      tags:
+      - DEVICE
+      summary: delete_device_id
+      operationId: delete_device_id
+      parameters: []
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/2ada58c66fbd4f4984a95fddb61a0b85
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: delete_device_id
+      x-server-name: Server 1
+    put:
+      tags:
+      - DEVICE
+      summary: put_device_id
+      operationId: put_device_id
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/put_device_id_request'
+            example:
+              name: in seraaaaa
+        required: true
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: PUT
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/2ada58c66fbd4f4984a95fddb61a0b85
+          headers:
+            Content-Type: application/json
+          body: >-
+            {
+
+              "name": "in seraaaaa"
+
+            }
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: put_device_id
+      x-server-name: Server 1
+  /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423:
+    get:
+      tags:
+      - DEVICE
+      summary: get_device
+      operationId: get_device
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: application/json
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423
+          headers:
+            Content-Type: application/json
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_device
+      x-server-name: Server 1
+  /api/sensors:
+    get:
+      tags:
+      - SENSOR
+      summary: get_sensors
+      operationId: get_sensors
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: application/json
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/sensors
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q
+            Content-Type: application/json
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_sensors
+      x-server-name: Server 1
+  /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors:
+    post:
+      tags:
+      - SENSOR
+      summary: post_sensor
+      operationId: post_sensor
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ3OTA0ODcsImlhdCI6MTYxNDc4Njg4NywibmJmIjoxNjE0Nzg2ODg3LCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.EncbND_ycnHsyyTEZKWiRB5QIfOsyoQjKqX8By58u8w
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/post_sensor_request'
+            example:
+              type: temperature
+              measure_unit: celssius
+        required: true
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ3OTA0ODcsImlhdCI6MTYxNDc4Njg4NywibmJmIjoxNjE0Nzg2ODg3LCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.EncbND_ycnHsyyTEZKWiRB5QIfOsyoQjKqX8By58u8w
+            Content-Type: application/json
+          body: '{"type":"temperature","measure_unit":"celssius"}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: post_sensor
+      x-server-name: Server 1
+    get:
+      tags:
+      - SENSOR
+      summary: get_device_sensors
+      operationId: get_device_sensors
+      parameters: []
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_device_sensors
+      x-server-name: Server 1
+  /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/341dcf6592c8448b92c30a1736e8d019:
+    delete:
+      tags:
+      - SENSOR
+      summary: delete_sensor_id
+      operationId: delete_sensor_id
+      parameters: []
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/341dcf6592c8448b92c30a1736e8d019
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: delete_sensor_id
+      x-server-name: Server 1
+  /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/f439da3c444c4220bbb69c53b555504c:
+    put:
+      tags:
+      - SENSOR
+      summary: put_sensor_id
+      operationId: put_sensor_id
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/put_sensor_id_request'
+            example:
+              measure_unit: farenheit
+        required: true
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: PUT
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/f439da3c444c4220bbb69c53b555504c
+          headers:
+            Content-Type: application/json
+          body: '{"measure_unit":"farenheit"}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: put_sensor_id
+      x-server-name: Server 1
+  /api/users/0b5d8978592048f0898d9c99d989f92f/sensors:
+    get:
+      tags:
+      - SENSOR
+      summary: get_user_sensors
+      operationId: get_user_sensors
+      parameters: []
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/sensors
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_user_sensors
+      x-server-name: Server 1
+  /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/81f6d2243b4047f2bd69d5b699b8e1f9:
+    get:
+      tags:
+      - SENSOR
+      summary: get_sensor
+      operationId: get_sensor
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: application/json
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/81f6d2243b4047f2bd69d5b699b8e1f9
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q
+            Content-Type: application/json
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_sensor
+      x-server-name: Server 1
+  /api/data:
+    get:
+      tags:
+      - DATA
+      summary: get_data
+      operationId: get_data
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MTI0ODIsImlhdCI6MTYxNDUwODg4MiwibmJmIjoxNjE0NTA4ODgyLCJpZGVudGl0eSI6Njh9.Ke71VHKll0HqyNCKWBLddO_tgdyZj1LBRGkZN5gymcY
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: application/json
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/data
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MTI0ODIsImlhdCI6MTYxNDUwODg4MiwibmJmIjoxNjE0NTA4ODgyLCJpZGVudGl0eSI6Njh9.Ke71VHKll0HqyNCKWBLddO_tgdyZj1LBRGkZN5gymcY
+            Content-Type: application/json
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_data
+      x-server-name: Server 1
+  ? /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/81f6d2243b4047f2bd69d5b699b8e1f9/data
+  : post:
+      tags:
+      - DATA
+      summary: post_data
+      operationId: post_data
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/post_data_request'
+            example:
+              value: 2000
+        required: true
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/81f6d2243b4047f2bd69d5b699b8e1f9/data
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q
+            Content-Type: application/json
+          body: '{"value":2000}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: post_data
+      x-server-name: Server 1
+    get:
+      tags:
+      - DATA
+      summary: get_sensor_data
+      operationId: get_sensor_data
+      parameters: []
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/81f6d2243b4047f2bd69d5b699b8e1f9/data
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_sensor_data
+      x-server-name: Server 1
+  ? /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/81f6d2243b4047f2bd69d5b699b8e1f9/data/3debb47fe3624043b1439f5f6212ee17
+  : delete:
+      tags:
+      - DATA
+      summary: delete_data_id
+      operationId: delete_data_id
+      parameters: []
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/81f6d2243b4047f2bd69d5b699b8e1f9/data/3debb47fe3624043b1439f5f6212ee17
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: delete_data_id
+      x-server-name: Server 1
+  /filter:
+    get:
+      tags:
+      - DATA
+      summary: get_filtered_sensor_data
+      operationId: get_filtered_sensor_data
+      parameters:
+      - name: min_value
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 100
+      - name: from
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: 2000-11-11
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MTI0ODIsImlhdCI6MTYxNDUwODg4MiwibmJmIjoxNjE0NTA4ODgyLCJpZGVudGl0eSI6Njh9.Ke71VHKll0HqyNCKWBLddO_tgdyZj1LBRGkZN5gymcY
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+      - url: https://18.192.42.42:5000/api/users/0b5d8978592048f0898d9c99d989f92f/devices/361a7a6ef365452c88cf8abf05376423/sensors/81f6d2243b4047f2bd69d5b699b8e1f9/data
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /filter?min_value=100&from=2000-11-11
+          headers:
+            Authorization: jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MTI0ODIsImlhdCI6MTYxNDUwODg4MiwibmJmIjoxNjE0NTA4ODgyLCJpZGVudGl0eSI6Njh9.Ke71VHKll0HqyNCKWBLddO_tgdyZj1LBRGkZN5gymcY
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: get_filtered_sensor_data
+      x-server-name: Server 2
+  /api/health:
+    get:
+      tags:
+      - Misc
+      summary: health
+      operationId: health
+      parameters: []
+      responses:	
+        200:	
+          description: 'OK'	
+          headers: {}	
+        400:	
+          description: 'BAD_REQUEST'	
+          headers: {}	
+        401:	
+          description: 'UNAUTHORIZED'	
+          headers: {}	
+        404:	
+          description: 'NOT FOUND'	
+          headers: {}	
+        5XX:	
+          description: 'INTERNAL SERVER ERROR'	
+          headers: {}
+      deprecated: false
+      servers:
+      - url: http://18.192.42.42:5000
+        variables: {}
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /api/health
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: 200
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: health
+      x-server-name: Server 1
+components:
+  schemas:
+    authrequest:
+      title: authrequest
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      example:
+        username: IoTIC Admin
+        password: '!!new_Password'
+    post_user_request:
+      title: post_user_request
+      required:
+      - username
+      - password
+      - email
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+      example:
+        username: teiaaaaVAVA
+        password: '!!new_Password'
+        email: teiaaaavava@yahoo.com
+    put_user_id_request:
+      title: put_user_id_request
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+      example:
+        id: 1
+    post_device_request:
+      title: post_device_request
+      required:
+      - name
+      - description
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      example:
+        name: device_6
+        description: description_2
+    put_device_id_request:
+      title: put_device_id_request
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: in seraaaaa
+    post_sensor_request:
+      title: post_sensor_request
+      required:
+      - type
+      - measure_unit
+      type: object
+      properties:
+        type:
+          type: string
+        measure_unit:
+          type: string
+      example:
+        type: temperature
+        measure_unit: celssius
+    put_sensor_id_request:
+      title: put_sensor_id_request
+      required:
+      - measure_unit
+      type: object
+      properties:
+        measure_unit:
+          type: string
+      example:
+        measure_unit: farenheit
+    post_data_request:
+      title: post_data_request
+      required:
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int32
+      example:
+        value: 2000
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: http://example.com/auth
+          scopes: {}
+security:
+- oauth2: []
+tags:
+- name: USER
+- name: DEVICE
+- name: SENSOR
+- name: DATA
+- name: Misc
+  description: ''

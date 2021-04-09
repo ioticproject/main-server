@@ -1,0 +1,1138 @@
+{
+	"info": {
+		"_postman_id": "2ff3f615-2a6b-4d03-a183-62b7f9ce7678",
+		"name": "IoTIC_Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "auth",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123321123\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/auth",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login_user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"IoTIC Admin\",\r\n    \"password\": \"!!new_Password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/login",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post_user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"id\": \"5c19a5a2fcd64e2a9401225b61596b3d\",\r\n    \"password\": \"123321123\",\r\n    \"email\": \"admin@yahoo.com\",\r\n    \"firstName\": \"Teia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post_admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"IoTIC Admin\",\r\n    \"password\": \"!!new_Password\",\r\n    \"email\": \"iotic.team@outlook.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_user_id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ3OTA0ODcsImlhdCI6MTYxNDc4Njg4NywibmJmIjoxNjE0Nzg2ODg3LCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.EncbND_ycnHsyyTEZKWiRB5QIfOsyoQjKqX8By58u8w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/fad3fb47c0c74bf29baa6c7574eb1f70",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"fad3fb47c0c74bf29baa6c7574eb1f70"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put_user_id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ3Nzg2MzcsImlhdCI6MTYxNDc3NTAzNywibmJmIjoxNjE0Nzc1MDM3LCJpZGVudGl0eSI6Njh9.l6qDiawkPUqOXOsknL6CUljcKfclkWyxnA2MwC8jiPM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"password\": \"1123321123\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DEVICE",
+			"item": [
+				{
+					"name": "get_devices",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/devices",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post_device",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ5MzY2NzEsImlhdCI6MTYxNDkzMzA3MSwibmJmIjoxNjE0OTMzMDcxLCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.8KJiCKa0C7QA84aB7LNObq7pBzxG9B1tTKcPi0TyOHE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_device_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/2ada58c66fbd4f4984a95fddb61a0b85",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"2ada58c66fbd4f4984a95fddb61a0b85"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put_device_id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"in seraaaaa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user_devices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_device",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SENSOR",
+			"item": [
+				{
+					"name": "get_sensors",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/sensors",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"sensors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post_sensor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ3OTA0ODcsImlhdCI6MTYxNDc4Njg4NywibmJmIjoxNjE0Nzg2ODg3LCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.EncbND_ycnHsyyTEZKWiRB5QIfOsyoQjKqX8By58u8w",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"type\": \"temperature\", \"measure_unit\": \"celssius\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}/sensors",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}",
+								"sensors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_sensor_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}/sensors/341dcf6592c8448b92c30a1736e8d019",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}",
+								"sensors",
+								"341dcf6592c8448b92c30a1736e8d019"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put_sensor_id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"measure_unit\": \"farenheit\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}/sensors/f439da3c444c4220bbb69c53b555504c",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}",
+								"sensors",
+								"f439da3c444c4220bbb69c53b555504c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user_sensors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/sensors",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"sensors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_device_sensors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}/sensors",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}",
+								"sensors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_sensor",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}/sensors/{{sensor_id}}",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}",
+								"sensors",
+								"{{sensor_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DATA",
+			"item": [
+				{
+					"name": "get_data",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MTI0ODIsImlhdCI6MTYxNDUwODg4MiwibmJmIjoxNjE0NTA4ODgyLCJpZGVudGl0eSI6Njh9.Ke71VHKll0HqyNCKWBLddO_tgdyZj1LBRGkZN5gymcY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/data",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post_data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MDc3OTQsImlhdCI6MTYxNDUwNDE5NCwibmJmIjoxNjE0NTA0MTk0LCJpZGVudGl0eSI6Njh9.LyFdNm8cMd8MjZEfFPSpDypFvA7R-gG5Ux6zp9kZR4Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"value\": -122.9}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}/sensors/{{sensor_id}}/data",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}",
+								"sensors",
+								"{{sensor_id}}",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_data_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}/sensors/{{sensor_id}}/data/3debb47fe3624043b1439f5f6212ee17",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}",
+								"sensors",
+								"{{sensor_id}}",
+								"data",
+								"3debb47fe3624043b1439f5f6212ee17"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_sensor_data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}/sensors/{{sensor_id}}/data",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}",
+								"sensors",
+								"{{sensor_id}}",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_filtered_sensor_data",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ1MTI0ODIsImlhdCI6MTYxNDUwODg4MiwibmJmIjoxNjE0NTA4ODgyLCJpZGVudGl0eSI6Njh9.Ke71VHKll0HqyNCKWBLddO_tgdyZj1LBRGkZN5gymcY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/devices/{{device_id}}/sensors/{{sensor_id}}/data/filter?min_value=1&from=2000-11-11",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"devices",
+								"{{device_id}}",
+								"sensors",
+								"{{sensor_id}}",
+								"data",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "min_value",
+									"value": "1"
+								},
+								{
+									"key": "from",
+									"value": "2000-11-11"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IOT",
+			"item": [
+				{
+					"name": "sync",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "apiKey",
+								"value": "4de033bc92004a01b89ca21c11125c93",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/iot/sync",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"iot",
+								"sync"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "iot_device",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "apiKey",
+								"value": "4de033bc92004a01b89ca21c11125c93",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"numeeeeee\",\r\n    \"description\": \"descriereeeee\",\r\n    \"sensors\": [\r\n        {\r\n            \"id\": \"iddddddddd\",\r\n            \"type\": \"temperature\",\r\n            \"measure_unit\": \"*C\"\r\n        },\r\n        {\r\n            \"id\": \"iddddddddd\",\r\n            \"type\": \"asasas\",\r\n            \"measure_unit\": \"jajajaja\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/iot/devices",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"iot",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "iot_data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "apiKey",
+								"type": "text",
+								"value": "71f9b65226404ecf9860643d985cc40b"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"id_sensor\":\"625d5301bb374c15bf2eadaa54119f6e\", \"timestamp\":\"1970-01-01 00:00:09\", \"value\":5}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/iot/data",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"iot",
+								"data"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NOTIFICATION",
+			"item": [
+				{
+					"name": "post_firebaseToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ5MzY2NzEsImlhdCI6MTYxNDkzMzA3MSwibmJmIjoxNjE0OTMzMDcxLCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.8KJiCKa0C7QA84aB7LNObq7pBzxG9B1tTKcPi0TyOHE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/firebaseToken",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"firebaseToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send_notifications",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQ5MzY2NzEsImlhdCI6MTYxNDkzMzA3MSwibmJmIjoxNjE0OTMzMDcxLCJpZGVudGl0eSI6IjE1ODg5MTg2ZGYzZTRiYTk4ZWNkMDcxNDQyMmQzNzRiIn0.8KJiCKa0C7QA84aB7LNObq7pBzxG9B1tTKcPi0TyOHE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/api/users/{{user_id}}/firebaseToken",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"firebaseToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/api/health",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "tokenName",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "headerPrefix",
+				"value": "jwt",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ip",
+			"value": "52.29.155.35"
+		},
+		{
+			"key": "port",
+			"value": "5000"
+		},
+		{
+			"key": "user_id",
+			"value": "0b5d8978592048f0898d9c99d989f92f"
+		},
+		{
+			"key": "device_id",
+			"value": "361a7a6ef365452c88cf8abf05376423"
+		},
+		{
+			"key": "sensor_id",
+			"value": "81f6d2243b4047f2bd69d5b699b8e1f9"
+		}
+	]
+}

@@ -1,0 +1,5 @@
+Start services:
+    docker-compose up --build
+
+Swagger Documentation link:
+    https://app.swaggerhub.com/apis-docs/teia/iotic/1.0.0#/
