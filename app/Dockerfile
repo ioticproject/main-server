@@ -1,4 +1,4 @@
-FROM python:3.8.6-alpine3.11
+FROM python
 
 WORKDIR /var/www/
 ADD . /var/www/

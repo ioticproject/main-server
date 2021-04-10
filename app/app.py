@@ -15,6 +15,9 @@ import routes.sensor_routes
 import routes.user_routes
 import routes.iot_routes
 import routes.notifications
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from db import initialize_db
 from security.security import (

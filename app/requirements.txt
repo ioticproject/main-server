@@ -13,3 +13,4 @@ Flask-JWT
 python-dotenv
 flask-cors
 coolname==1.1.0
+python-dotenv
