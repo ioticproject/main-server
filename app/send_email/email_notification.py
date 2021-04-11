@@ -52,13 +52,9 @@ def send_confirmation_email(dest_email, dest_name, dest_id):
     msg["Subject"] = "IoTIC Account Confirmation"
     msg.attach(part)
 
-    host =  os.environ.get("HOST")
+    host = os.environ["IP"]
 
     smtp.sendmail('iotic.team@outlook.com',
                 dest_email,
-                msg.as_string().replace('{username}',
-                                        dest_name).replace('{user_id}',
-                                                           dest_id).replace('{ip}',
-                                                                            host).replace('{port}',
-                                                                                          '5000'))
+                msg.as_string().replace('{username}', dest_name).replace('{user_id}', dest_id).replace('{ip}', host).replace('{port}', '5000'))
     smtp.quit()
