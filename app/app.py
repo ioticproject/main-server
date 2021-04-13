@@ -60,6 +60,15 @@ jwt = JWT(app, authenticate, identity)
 DB_ADMIN = os.environ.get("DB_ADMIN")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 DB_HOST = os.environ.get("DB_HOST")
+
+import sys
+if not DB_ADMIN:
+    sys.exit("DB_ADMIN not set!!")
+if not DB_PASSWORD:
+    sys.exit("DB_PASSWORD not set!!")
+if not DB_HOST:
+    sys.exit("DB_HOST not set!!")
+
 DB_URL = "mongodb+srv://" + DB_ADMIN + ":" + DB_PASSWORD + "@" + DB_HOST
 
 app.config['MONGODB_SETTINGS'] = [
