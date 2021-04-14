@@ -61,27 +61,28 @@ DB_ADMIN = os.environ.get("DB_ADMIN")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 DB_HOST = os.environ.get("DB_HOST")
 DB_URL = "mongodb+srv://" + DB_ADMIN + ":" + DB_PASSWORD + "@" + DB_HOST
+AUTH_SOURCE = "?authSource=admin"
 
 app.config['MONGODB_SETTINGS'] = [
     {
         'ALIAS': 'user-db-alias',
-        'host': DB_URL + "/user"
+        'host': DB_URL + "/user" + AUTH_SOURCE
     },
     {
         'ALIAS': 'device-db-alias',
-        'host': DB_URL + "/device"
+        'host': DB_URL + "/device" + AUTH_SOURCE
     },
     {
         'ALIAS': 'sensor-db-alias',
-        'host': DB_URL + "/sensor"
+        'host': DB_URL + "/sensor" + AUTH_SOURCE
     },
     {
         'ALIAS': 'data-db-alias',
-        'host': DB_URL + "/data"
+        'host': DB_URL + "/data" + AUTH_SOURCE
     },
     {
         'ALIAS': 'firebaseToken-db-alias',
-        'host': DB_URL + "/firebaseToken"
+        'host': DB_URL + "/firebaseToken" + AUTH_SOURCE
     }
 ]
 
@@ -91,7 +92,7 @@ initialize_db(app)
 @app.route('/api/health')
 # @jwt_required()
 def health_check():
-    return {'message': 'Healthy'}, HTTPStatus.OK
+    return {'message': 'Healthy' + DB_URL}, HTTPStatus.OK
 
 
 @app.route('/api/welcome/<username>')
