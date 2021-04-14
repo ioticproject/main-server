@@ -101,7 +101,7 @@ initialize_db(app)
 @app.route('/api/health')
 # @jwt_required()
 def health_check():
-    return {'message': 'Healthy' + DB_URL}, HTTPStatus.OK
+    return {'message': 'Healthy'}, HTTPStatus.OK
 
 
 @app.route('/api/welcome/<username>')
