@@ -19,5 +19,6 @@ class User(db.Document):
     country = StringField(required=False, max_length=50, default="Undefined")
 
     confirmed = BooleanField(required=True, default=False)
+    resetPasswordCode = StringField(required=False, max_length=50, default="Undefined")
 
     meta = {'db_alias': 'user-db-alias'}

@@ -22,6 +22,10 @@ def encode_password(password):
     return str(hashlib.md5((password + os.getenv("PASSWORD_SECRET")).encode()).hexdigest())
 
 
+def encode_reset_password_code(resetPasswordCode):
+    return str(hashlib.md5((resetPasswordCode + os.getenv("RESET_PASSWORD_SECRET")).encode()).hexdigest())
+
+
 def check_admin_credentials(func):
     pass
 #     def inner():

@@ -6,6 +6,8 @@ from http import HTTPStatus
 import uuid
 import datetime
 import json
+import random
+import string
 
 
 def format_timestamp(lst):
@@ -23,6 +25,9 @@ def get_device_apiKey(apiKey):
         return devices.get(0)
     return None
 
+
+def get_new_reset_password_code():
+    return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(8))
 
 # #################################################################################################
 # USERS

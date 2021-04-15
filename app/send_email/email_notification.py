@@ -40,16 +40,12 @@ def send_confirmation_email(dest_email, dest_name, dest_id):
     smtp.ehlo()
     smtp.starttls()
 
-    # if not os.environ.get("ADMIN_EMAIL"):
-    #     sys.exit("Could not fetch the admin email.")
-    # if not os.environ.get("PASSWORD_EMAIL"):
-    #     sys.exit("Could not fetch the email password.")
     smtp.login("iotic.team@outlook.com", os.environ.get("PASSWORD_EMAIL"))
 
     html = open("send_email/email_registration_template.html", "r").read()
     part = MIMEText(html, "html")
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = "IoTIC Account Confirmation"
+    msg["Subject"] = "[IoTIC] Account Confirmation"
     msg.attach(part)
 
     host = os.environ["IP"]
@@ -57,4 +53,27 @@ def send_confirmation_email(dest_email, dest_name, dest_id):
     smtp.sendmail('iotic.team@outlook.com',
                 dest_email,
                 msg.as_string().replace('{username}', dest_name).replace('{user_id}', dest_id).replace('{ip}', host).replace('{port}', '5000'))
+    smtp.quit()
+
+
+
+def send_reset_password_email(dest_email, dest_name, resetPasswordCode):
+    smtp = smtplib.SMTP('smtp-mail.outlook.com', port=str(os.environ.get("SMTP_PORT")))
+
+    smtp.ehlo()
+    smtp.starttls()
+
+    smtp.login("iotic.team@outlook.com", os.environ.get("PASSWORD_EMAIL"))
+
+    html = open("send_email/email_forgot_password_template.html", "r").read()
+    part = MIMEText(html, "html")
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = "[IoTIC] Reset Password"
+    msg.attach(part)
+
+    host = os.environ["IP"]
+
+    smtp.sendmail('iotic.team@outlook.com',
+                dest_email,
+                msg.as_string().replace('{username}', dest_name).replace('{resetPasswordCode}', resetPasswordCode).replace('{ip}', host).replace('{port}', '5000'))
     smtp.quit()

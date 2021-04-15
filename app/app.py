@@ -175,6 +175,16 @@ def update_user(id):
     return routes.user_routes.update_user(id)
 
 
+@app.route('/api/users/forgotPassword', methods=['POST'])
+def generate_reset_password_code():
+    return routes.user_routes.generate_reset_password_code()
+
+
+@app.route('/api/users/resetPassword', methods=['POST'])
+def reset_password():
+    return routes.user_routes.reset_password()
+
+
 @app.route('/api/users/<id>', methods=['DELETE'])
 @jwt_required()
 def delete_user(id):

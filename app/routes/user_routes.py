@@ -1,21 +1,22 @@
 import sys
 import os
 from http import HTTPStatus
+import re
 
 from flask import Response, request, jsonify
 
 sys.path.append('..\\')
 
-from send_email.email_notification import send_confirmation_email
+from send_email.email_notification import send_confirmation_email, send_reset_password_email
 from exceptions.email_exception import EmailOperationError
 from http_utils.http_client import Client
 from models.firebaseToken import FirebaseToken
 from models.device import Device
 from models.sensor import Sensor
 from models.user import User
-from security.security import encode_password
-from utils import get_new_id, user_id_exists, format_timestamp
-from validation import check_user_post, check_user_put
+from security.security import encode_password, encode_reset_password_code
+from utils import get_new_id, user_id_exists, format_timestamp, get_new_reset_password_code
+from validation import check_user_post, check_user_put, password_regex
 from routes.device_routes import delete_device
 
 
@@ -104,6 +105,60 @@ def add_user():
 
     except EmailOperationError:
         return ret
+
+
+def generate_reset_password_code():
+    body = request.get_json()
+    credential = body.get('credential')
+
+    users = User.objects.filter(email=credential)
+    if not users:
+        users = User.objects.filter(name=credential)
+        if not users:
+            return {"error": "This email/username was not associated with an IoTIC account."}, HTTPStatus.NOT_FOUND
+
+    user = users.get(0)
+    resetPasswordCode = get_new_reset_password_code()
+
+    send_reset_password_email(user.email, user.name, resetPasswordCode)
+    User.objects.get(id=user.id).update(**{'resetPasswordCode': encode_reset_password_code(resetPasswordCode)})
+    return "", HTTPStatus.OK
+
+
+def reset_password():
+    body = request.get_json()
+    resetPasswordCode = body.get('resetPasswordCode')
+    credential = body.get('credential')
+
+    users = User.objects.filter(email=credential)
+    if not users:
+        users = User.objects.filter(name=credential)
+        if not users:
+            return {"error": "This email/username was not associated with an IoTIC account."}, HTTPStatus.NOT_FOUND
+
+    user = users.get(0)
+
+    if user.resetPasswordCode != "Undefined":
+        if encode_reset_password_code(resetPasswordCode) == user.resetPasswordCode:
+            new_password = body.get('newPassword')
+
+            if not new_password:
+                return {"error": "The new password is missing."}, HTTPStatus.BAD_REQUEST
+
+            if not re.fullmatch(password_regex, new_password):
+                return {'error': 'The password format is invalid. It must contain at least 8 symbols.'}, HTTPStatus.BAD_REQUEST
+
+            password = encode_password(new_password)
+            if password == user.password:
+                return {'error': 'The new password must be different from the old one.'}, HTTPStatus.BAD_REQUEST
+
+            user.update(**{'password': password, 'resetPasswordCode': 'Undefined'})
+        else:
+            return {"error": "Invalid code."}, HTTPStatus.UNAUTHORIZED
+
+        return "", HTTPStatus.OK
+    else:
+        return {"error": "There is no reset password code. Please generate one."}, HTTPStatus.UNAUTHORIZED
 
 
 def get_user(id):
