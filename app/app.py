@@ -18,6 +18,7 @@ import routes.sensor_routes
 import routes.user_routes
 import routes.iot_routes
 import routes.notifications
+import routes.messages_routes
 
 
 from db import initialize_db
@@ -92,7 +93,11 @@ app.config['MONGODB_SETTINGS'] = [
     {
         'ALIAS': 'firebaseToken-db-alias',
         'host': DB_URL + "/firebaseToken" + AUTH_SOURCE
-    }
+    },
+    {
+        'ALIAS': 'messages-db-alias',
+        'host': DB_URL + "/messages" + AUTH_SOURCE
+    },
 ]
 
 initialize_db(app)
@@ -389,3 +394,28 @@ if __name__ == '__main__':
     ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
     ENVIRONMENT_PORT = os.environ.get("APP_PORT", 5000)
     app.run(host='0.0.0.0', port=5000, debug=ENVIRONMENT_DEBUG)
+
+# ##############################  MESSAGES  ##################################
+
+@app.route('/api/messages', methods=['GET'])
+@jwt_required()
+def get_messages():
+    ret = is_not_admin()
+    if ret:
+        return ret
+    return routes.messages_routes.get_messages()
+
+
+@app.route('/api/messages', methods=['POST'])
+def add_messages():
+    return routes.messages_routes.add_message()
+
+
+@app.route('/api/messages/<id>', methods=['DELETE'])
+@jwt_required()
+def delete_message(id):
+    if is_token_stolen(id):
+        return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
+
+    return routes.messages_routes.delete_message(id)
+
