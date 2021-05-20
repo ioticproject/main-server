@@ -8,7 +8,6 @@ import datetime
 from flask import Flask, request
 from flask_cors import CORS
 from flask_jwt import JWT, jwt_required, current_identity
- 
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -338,7 +337,6 @@ def delete_sensor(id_user, id_device, id):
 
 @app.route('/api/data', methods=['GET'])
 @jwt_required()
-# @check_admin_credentials
 def get_data():
     ret = is_not_admin()
     if ret:
@@ -390,11 +388,6 @@ def get_filtered_sensor_data(id_user, id_device, id_sensor):
 def send_notifications(id_user):
     return routes.notifications.send_notifications(id_user)
 
-if __name__ == '__main__':
-    ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
-    ENVIRONMENT_PORT = os.environ.get("APP_PORT", 5000)
-    app.run(host='0.0.0.0', port=5000, debug=ENVIRONMENT_DEBUG)
-
 # ##############################  MESSAGES  ##################################
 
 @app.route('/api/messages', methods=['GET'])
@@ -419,3 +412,7 @@ def delete_message(id):
 
     return routes.messages_routes.delete_message(id)
 
+if __name__ == '__main__':
+    ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
+    ENVIRONMENT_PORT = os.environ.get("APP_PORT", 5000)
+    app.run(host='0.0.0.0', port=5000, debug=ENVIRONMENT_DEBUG)
