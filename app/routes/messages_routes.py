@@ -1,6 +1,6 @@
 import sys
 from http import HTTPStatus
-from flask import Response, request
+from flask import request
 
 sys.path.append('..\\')
 
@@ -23,6 +23,27 @@ def add_message():
     return '',  HTTPStatus.CREATED
 
 
-def delete_user(id):
+def edit_message(id):
+    body = request.get_json()
+    body['read'] = True
+
+    Message.objects.get(id=id).update(**body)
+
+    return '',  HTTPStatus.CREATED
+
+
+def faq_message(id):
+    faq = {'faq': True}
+
+    Message.objects.get(id=id).update(**faq)
+    return '',  HTTPStatus.CREATED
+
+
+def get_faq_messages():
+    messages = Message.objects().filter(faq=True)
+    return {'messages': messages}, HTTPStatus.OK
+
+
+def delete_message(id):
     Message.objects.get(id=id).delete()
     return '', HTTPStatus.OK

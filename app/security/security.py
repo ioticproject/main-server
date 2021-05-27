@@ -36,9 +36,13 @@ def check_admin_credentials(func):
 #     return inner
 
 def is_not_admin():
-    if not current_identity.name == os.getenv("ADMIN_USERNAME") or not current_identity.password == encode_password(os.getenv("ADMIN_PASSWORD")):
+    if not current_identity.role == 'admin':
         return {"error": "You must provide the admin authorization token."}, HTTPStatus.UNAUTHORIZED
 
+
+def is_not_support():
+    if not current_identity.role == 'support':
+        return {"error": "You must provide the support authorization token."}, HTTPStatus.UNAUTHORIZED
 
 
 def is_token_stolen(id_user):

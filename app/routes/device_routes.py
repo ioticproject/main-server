@@ -48,6 +48,7 @@ def get_user_devices(id_user):
 
 def get_devices():
     devices = Device.objects()
+    import ipdb; ipdb.set_trace()
 
     return {'devices': format_timestamp(devices)}, HTTPStatus.OK
 

@@ -37,7 +37,6 @@ def unsubscribe(username):
 
 def get_users():
     users = User.objects()
-
     return {'users': users}, HTTPStatus.OK
 
 
@@ -67,7 +66,8 @@ def login_user():
         'password': password,
         'email': user.email,
         '_id': user.id,
-        'access_token': access_token}, HTTPStatus.CREATED
+        'access_token': access_token,
+        'role': user.role}, HTTPStatus.CREATED
 
 
 def add_user():
@@ -98,7 +98,8 @@ def add_user():
         'password': password,
         'email': user.email,
         '_id': user.id,
-        'access_token': access_token}, HTTPStatus.CREATED
+        'access_token': access_token,
+        'role': user.role}, HTTPStatus.CREATED
     try:
         send_confirmation_email(user.email, user.name, str(user.id))
         return ret

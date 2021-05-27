@@ -37,7 +37,7 @@ def message(subject="IoTIC Notification", text="", img=None, attachment=None):
 def send_confirmation_email(dest_email, dest_name, dest_id):
     smtp = smtplib.SMTP('smtp-mail.outlook.com', port=str(os.environ.get("SMTP_PORT")))
 
-    smtp.ehlo()
+    smtp.ehlo() 
     smtp.starttls()
 
     smtp.login("iotic.team@outlook.com", os.environ.get("PASSWORD_EMAIL"))

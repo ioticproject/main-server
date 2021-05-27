@@ -21,4 +21,6 @@ class User(db.Document):
     confirmed = BooleanField(required=True, default=False)
     resetPasswordCode = StringField(required=False, max_length=50, default="Undefined")
 
+    role = StringField(required=False, max_length=50, default="user")
+
     meta = {'db_alias': 'user-db-alias'}

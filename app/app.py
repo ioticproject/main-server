@@ -25,6 +25,7 @@ from security.security import (
     authenticate,
     identity,
     is_not_admin,
+    is_not_support,
     is_token_stolen
     )
 
@@ -393,7 +394,7 @@ def send_notifications(id_user):
 @app.route('/api/messages', methods=['GET'])
 @jwt_required()
 def get_messages():
-    ret = is_not_admin()
+    ret = is_not_support()
     if ret:
         return ret
     return routes.messages_routes.get_messages()
@@ -404,13 +405,40 @@ def add_messages():
     return routes.messages_routes.add_message()
 
 
+@app.route('/api/messages/<id>', methods=['PUT'])
+@jwt_required()
+def edit_message(id):
+    ret = is_not_support()
+    if ret:
+        return ret
+
+    return routes.messages_routes.edit_message(id)
+
+
 @app.route('/api/messages/<id>', methods=['DELETE'])
 @jwt_required()
 def delete_message(id):
-    if is_token_stolen(id):
-        return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
+    ret = is_not_support()
+    if ret:
+        return ret
 
     return routes.messages_routes.delete_message(id)
+
+
+@app.route('/api/messages/faq/<id>', methods=['PUT'])
+@jwt_required()
+def faq_message(id):
+    ret = is_not_support()
+    if ret:
+        return ret
+
+    return routes.messages_routes.faq_message(id)
+
+
+@app.route('/api/messages/faq', methods=['GET'])
+def get_faq_messages():
+    return routes.messages_routes.get_faq_messages()
+
 
 if __name__ == '__main__':
     ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
