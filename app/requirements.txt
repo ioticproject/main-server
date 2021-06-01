@@ -1,3 +1,5 @@
+websocket-client==1.0.1
+websocket==0.2.1
 click==7.1.2
 Flask==1.1.2
 python-dotenv
@@ -15,5 +17,3 @@ python-dotenv
 flask-cors
 coolname==1.1.0
 python-dotenv
-websocket
-websocket-client
