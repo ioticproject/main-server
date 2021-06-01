@@ -67,6 +67,7 @@ def get_filtered_sensor_data(id_user, id_device, id_sensor):
 
 
 def add_data(id_sensor, body, id_user, id_device):
+    
     resp = check_data_post(body, id_user, id_device, id_sensor)
 
     if resp:
@@ -77,8 +78,6 @@ def add_data(id_sensor, body, id_user, id_device):
         time = body["timestamp"]
         body.update({"timestamp": datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')})
     data = Data(**body).save()
-
-    Client.trigger(id_user, id_sensor, body["value"])
 
     id = data.id
     return {'_id': str(id)}, HTTPStatus.CREATED

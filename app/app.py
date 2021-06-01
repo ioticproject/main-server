@@ -29,6 +29,28 @@ from security.security import (
     is_token_stolen
     )
 
+from http_utils.pubsub_client import (PubSubClient, PubSubAuth)
+
+
+auth = PubSubAuth("secret")
+
+auth.grantSubscribe({
+    "token": "secret_token",
+    "pattern": "*"
+})
+
+auth.grantPublish({
+            "token": "36b5fe56debf4309a91817fba1efb743",
+            "pattern": "5c19a5a2fcd64e2a9401225b61596b3d.85b4dbc8e1b44cd4b9a2e6aaeb26e851.*"
+        })
+
+client = PubSubClient("secret_token", routes.iot_routes.recvData)
+import time
+time.sleep(1)
+
+client.subscribe("*")
+
+
 class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):
         try:
@@ -130,12 +152,12 @@ def sync():
 
 @app.route('/iot/devices', methods=['POST'])
 def iot_device():
-    return routes.iot_routes.put_device()
+    return routes.iot_routes.put_device(auth)
 
 
-@app.route('/iot/data', methods=['POST'])
-def iot_data():
-    return routes.iot_routes.put_data()
+# @app.route('/iot/data', methods=['POST'])
+# def iot_data():
+#     return routes.iot_routes.put_data()
 
 
 # #################################################################################################
@@ -443,4 +465,4 @@ def get_faq_messages():
 if __name__ == '__main__':
     ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
     ENVIRONMENT_PORT = os.environ.get("APP_PORT", 5000)
-    app.run(host='0.0.0.0', port=5000, debug=ENVIRONMENT_DEBUG)
+    app.run(host='0.0.0.0', port=5000, debug=False)
