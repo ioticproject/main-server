@@ -1,9 +1,7 @@
-import json
 import sys
 from http import HTTPStatus
 import datetime
-
-from flask import (Response, jsonify, request)
+from flask import request
 
 sys.path.append('..\\')
 from models.data import Data
@@ -15,7 +13,6 @@ from utils import (device_id_exists,
                    user_id_exists,
                    format_timestamp)
 from validation import check_sensor_post, check_sensor_put
-
 from routes.data_routes import delete_data
 
 

@@ -1,4 +1,4 @@
-from pubsub_client import PubSubClient
+from pub_sub_client import PubSubClient
 
 print("**********")
 id_user = "5c19a5a2fcd64e2a9401225b61596b3d"

@@ -1,10 +1,9 @@
-import json
 import sys
 from http import HTTPStatus
 import datetime
-from flask import Response, jsonify, request
+from flask import request
 import requests
-from http_utils.http_client import Client
+from clients.http_client import Client
 
 sys.path.append('..\\')
 from models.data import Data
@@ -67,7 +66,6 @@ def get_filtered_sensor_data(id_user, id_device, id_sensor):
 
 
 def add_data(id_sensor, body, id_user, id_device):
-    
     resp = check_data_post(body, id_user, id_device, id_sensor)
 
     if resp:

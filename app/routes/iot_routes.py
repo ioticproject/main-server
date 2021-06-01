@@ -4,24 +4,14 @@ from http import HTTPStatus
 import time
 import logging
 
-from flask import (Response, request)
+from flask import request
 
 sys.path.append('..\\')
 from models.device import Device
-from models.sensor import Sensor
-from models.user import User
-from utils import (device_id_exists,
-                   get_new_id,
-                   get_new_device_api_key,
-                   user_id_exists,
-                   format_timestamp,
-                   get_device_apiKey)
-from validation import check_device_post, check_device_put
+from utils import get_device_apiKey
 
-from routes.sensor_routes import delete_sensor, add_sensor
+from routes.sensor_routes import add_sensor
 from routes.data_routes import add_data
-from http_utils.pubsub_client import (PubSubClient, PubSubAuth)
-
 
 
 def sync():

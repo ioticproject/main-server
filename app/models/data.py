@@ -11,6 +11,5 @@ class Data(db.Document):
     id_user = StringField(foreign_key=True)
     value = FloatField(required=True)
     timestamp = DateTimeField(default=datetime.datetime.now())
-    # time = StringField(default=datetime.datetime.now().strftime('%a, %d %b %y, %H:%M'))
 
     meta = {'db_alias': 'data-db-alias'}

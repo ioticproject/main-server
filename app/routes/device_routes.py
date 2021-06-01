@@ -2,8 +2,7 @@ import json
 import sys
 from http import HTTPStatus
 import datetime
-
-from flask import (Response, jsonify, request)
+from flask import request
 
 sys.path.append('..\\')
 from models.device import Device
@@ -15,14 +14,15 @@ from utils import (device_id_exists,
                    user_id_exists,
                    format_timestamp)
 from validation import check_device_post, check_device_put
-
 from routes.sensor_routes import delete_sensor
 
 
 def get_device(id):
     devices = Device.objects.filter(id=id)
+
     if len(devices) == 0:
         return {'error': "The device id does not exist."}, HTTPStatus.NOT_FOUND
+
     device = devices.get(0)
     sensors = Sensor.objects.filter(id_device=id)
 
@@ -48,7 +48,6 @@ def get_user_devices(id_user):
 
 def get_devices():
     devices = Device.objects()
-    import ipdb; ipdb.set_trace()
 
     return {'devices': format_timestamp(devices)}, HTTPStatus.OK
 

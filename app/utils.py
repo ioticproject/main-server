@@ -13,7 +13,6 @@ import string
 def format_timestamp(lst):
     lst_json = list(map(lambda x: json.loads(x.to_json()), lst))
     for i, elem in enumerate(lst):
-        # datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S.%f')
         lst_json[i].update({'timestamp': elem.timestamp.strftime('%Y-%m-%d %H:%M:%S')})
 
     return lst_json

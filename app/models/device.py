@@ -13,6 +13,5 @@ class Device(db.Document):
     apiKey = StringField()
     min_val = FloatField(required=False, default=-1000)
     max_val = FloatField(required=False, default=1000)
-    # time = StringField(default=datetime.datetime.now().strftime('%a, %d %b %y, %H:%M'))
 
     meta = {'db_alias': 'device-db-alias'}

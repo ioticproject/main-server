@@ -2,7 +2,7 @@ import json
 import sys, os
 from http import HTTPStatus
 import datetime
-from flask import Response, jsonify, request
+from flask import Response, request
 import requests
 
 sys.path.append('..\\')

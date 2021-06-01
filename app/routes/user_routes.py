@@ -9,7 +9,7 @@ sys.path.append('..\\')
 
 from send_email.email_notification import send_confirmation_email, send_reset_password_email
 from exceptions.email_exception import EmailOperationError
-from http_utils.http_client import Client
+from clients.http_client import Client
 from models.firebaseToken import FirebaseToken
 from models.device import Device
 from models.sensor import Sensor

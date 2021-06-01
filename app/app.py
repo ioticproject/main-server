@@ -7,7 +7,7 @@ import datetime
 
 from flask import Flask, request
 from flask_cors import CORS
-from flask_jwt import JWT, jwt_required, current_identity
+from flask_jwt import JWT, jwt_required
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -29,7 +29,7 @@ from security.security import (
     is_token_stolen
     )
 
-from http_utils.pubsub_client import (PubSubClient, PubSubAuth)
+from clients.pub_sub_client import (PubSubClient, PubSubAuth)
 
 
 auth = PubSubAuth("secret")
@@ -175,7 +175,6 @@ def get_user(id):
 
 @app.route('/api/users', methods=['GET'])
 @jwt_required()
-# @check_admin_credentials
 def get_users():
     ret = is_not_admin()
     if ret:
@@ -243,7 +242,6 @@ def get_device(id_user, id):
 
 @app.route('/api/devices', methods=['GET'])
 @jwt_required()
-# @check_admin_credentials
 def get_devices():
     ret = is_not_admin()
     if ret:
@@ -300,7 +298,6 @@ def get_sensor(id_user, id_device, id):
 
 @app.route('/api/sensors', methods=['GET'])
 @jwt_required()
-# @check_admin_credentials
 def get_sensors():
     ret = is_not_admin()
     if ret:

@@ -57,10 +57,10 @@ class PubSubClient:
     listener = None
 
     def __init__(self, token, listener=None):
-        self.token = token 
+        self.token = token
         self.listener = listener
 
-        def run(*args):    
+        def run(*args):
             self.ws = WebSocketApp("ws://localhost:81",
                                     on_message = self.on_message,
                                     on_error = self.on_error,
