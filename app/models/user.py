@@ -12,7 +12,7 @@ class User(db.Document):
     role = StringField(required=False, max_length=50, default="user")
     firstName = StringField(required=False, max_length=50, default="Undefined")
     lastName = StringField(required=False, max_length=50, default="Undefined")
-    address = StringField(required=False, max_length=50, default="Undefined")
+    address = StringField(required=False, max_length=100, default="Undefined")
     city = StringField(required=False, max_length=50, default="Undefined")
     state = StringField(required=False, max_length=50, default="Undefined")
     zipCode = StringField(required=False, max_length=50, default="Undefined")

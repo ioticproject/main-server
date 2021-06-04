@@ -187,6 +187,11 @@ def login_user():
     return routes.user_routes.login_user()
 
 
+@app.route('/api/users/loginWithGoogle', methods=['POST'])
+def login_user_with_google():
+    return routes.user_routes.login_user_with_google()
+
+
 @app.route('/api/users', methods=['POST'])
 def add_user():
     return routes.user_routes.add_user()

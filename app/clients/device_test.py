@@ -1,10 +1,6 @@
 from pub_sub_client import PubSubClient
 import pytest
-
-
-@pytest.fixture(autouse=True)
-def run_before_tests():
-    pass
+import requests
 
 
 def test_ok():

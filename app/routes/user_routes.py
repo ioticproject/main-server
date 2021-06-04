@@ -69,6 +69,38 @@ def login_user():
         'access_token': access_token,
         'role': user.role}, HTTPStatus.CREATED
 
+def login_user_with_google():
+    access_token = request.get_json().get('access_token')
+
+    url = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=" + access_token
+    payload={}
+    headers = {}
+
+    import requests
+    resp = requests.request("GET", url, headers=headers, data=payload)
+
+    email = resp.json()['email']
+
+    users = User.objects.filter(email=email)
+
+    if len(users) == 0:
+        return str({'error': 'Invalid credentials. This email is not associate with an existing account. Please register first.'}), HTTPStatus.UNAUTHORIZED
+
+    user = users[0]
+    if not user.confirmed:
+        return str({'error': 'Please check your email and confirm your account.'}), HTTPStatus.UNAUTHORIZED
+
+    access_token = Client.generate_auth_token(username=user.name,
+                                              password=user.password)
+    if access_token is None:
+        return str({'error': 'Something went wrong with the authentication service.'}), HTTPStatus.SERVICE_UNAVAILABLE
+
+    return {
+        'username': user.name,
+        'email': user.email,
+        '_id': user.id,
+        'access_token': access_token,
+        'role': user.role}, HTTPStatus.CREATED
 
 def add_user():
     body = request.get_json()

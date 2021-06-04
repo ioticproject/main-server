@@ -36,7 +36,6 @@ def put_device(auth):
             "pattern": device.id_user + '.' + device.id + '.*'
         })
 
-
     device_body = {}
     if body.get('name'):
         device_body['name'] = body.get('name')
