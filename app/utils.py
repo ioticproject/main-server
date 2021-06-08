@@ -144,6 +144,21 @@ def get_sensor_by_id(_id, id_user, id_device):
         return None
 
 
+"""
+Get the sensor with the name <name>.
+If the id does not exist in the database, return None.
+Returns: Sensor or None
+"""
+def get_sensor_by_name(name, id_user, id_device):
+    sensors = Sensor.objects.filter(name=name,
+                                 id_user=id_user,
+                                 id_device=id_device)
+
+    if len(sensors) > 0:
+        return sensors[0]
+
+    return None
+
 # #################################################################################################
 # DATA
 # #################################################################################################

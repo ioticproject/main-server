@@ -7,6 +7,7 @@ from flask import request
 sys.path.append('..\\')
 from models.device import Device
 from models.sensor import Sensor
+from models.actor import Actor
 from models.user import User
 from utils import (device_id_exists,
                    get_new_id,
@@ -25,6 +26,7 @@ def get_device(id):
 
     device = devices.get(0)
     sensors = Sensor.objects.filter(id_device=id)
+    actors = Actor.objects.filter(id_device=id)
 
     ret = {
         '_id': device.id,
@@ -32,7 +34,8 @@ def get_device(id):
         'description': device.description,
         'id_user': device.id_user,
         'timestamp': device.timestamp,
-        'sensors': format_timestamp(sensors)
+        'sensors': format_timestamp(sensors),
+        'actors': format_timestamp(sensors)
         }
 
     return ret, HTTPStatus.OK

@@ -12,9 +12,10 @@ class PubSubAuth:
     ws = None
 
     def __init__(self, secret):
-        self.ws = create_connection("ws://localhost:82")
-        self.send("access-auth", {"secret": secret})
-        self.check()
+        # self.ws = create_connection("ws://localhost:82")
+        # self.send("access-auth", {"secret": secret})
+        # self.check()
+        pass
 
 
     def close(self):
@@ -67,7 +68,7 @@ class PubSubClient:
                                     on_close = self.on_close)
 
             self.ws.run_forever()
-        thread.start_new_thread(run, ())
+        # thread.start_new_thread(run, ())
 
 
     def send(self, event, data):

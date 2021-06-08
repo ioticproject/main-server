@@ -14,10 +14,13 @@ load_dotenv()
 import routes.data_routes
 import routes.device_routes
 import routes.sensor_routes
+import routes.actor_routes
 import routes.user_routes
 import routes.iot_routes
 import routes.notifications
 import routes.messages_routes
+import time
+
 
 
 from db import initialize_db
@@ -33,22 +36,21 @@ from clients.pub_sub_client import (PubSubClient, PubSubAuth)
 
 
 auth = PubSubAuth("secret")
+#
+# auth.grantSubscribe({
+#     "token": "secret_token",
+#     "pattern": "*"
+# })
+#
+# auth.grantPublish({
+#             "token": "36b5fe56debf4309a91817fba1efb743",
+#             "pattern": "5c19a5a2fcd64e2a9401225b61596b3d.85b4dbc8e1b44cd4b9a2e6aaeb26e851.*"
+#         })
 
-auth.grantSubscribe({
-    "token": "secret_token",
-    "pattern": "*"
-})
-
-auth.grantPublish({
-            "token": "36b5fe56debf4309a91817fba1efb743",
-            "pattern": "5c19a5a2fcd64e2a9401225b61596b3d.85b4dbc8e1b44cd4b9a2e6aaeb26e851.*"
-        })
-
-client = PubSubClient("secret_token", routes.iot_routes.recvData)
-import time
-time.sleep(1)
-
-client.subscribe("*")
+# client = PubSubClient("secret_token", routes.iot_routes.recvData)
+# time.sleep(1)
+#
+# client.subscribe("*")
 
 
 class CustomJSONEncoder(JSONEncoder):
@@ -107,6 +109,10 @@ app.config['MONGODB_SETTINGS'] = [
     {
         'ALIAS': 'sensor-db-alias',
         'host': DB_URL + "/sensor" + AUTH_SOURCE
+    },
+    {
+        'ALIAS': 'actor-db-alias',
+        'host': DB_URL + "/actor" + AUTH_SOURCE
     },
     {
         'ALIAS': 'data-db-alias',
@@ -353,6 +359,73 @@ def delete_sensor(id_user, id_device, id):
         return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
 
     return routes.sensor_routes.delete_sensor(id_user, id_device, id)
+
+
+# #################################################################################################
+# ACTORS
+# #################################################################################################
+
+
+@app.route('/api/users/<id_user>/devices/<id_device>/actors/<id>', methods=['GET'])
+@jwt_required()
+def get_actor(id_user, id_device, id):
+    if is_token_stolen(id_user):
+        return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
+    return routes.actor_routes.get_actor(id)
+
+
+@app.route('/api/actors', methods=['GET'])
+@jwt_required()
+def get_actors():
+    ret = is_not_admin()
+    if ret:
+        return ret
+    return routes.actor_routes.get_actors()
+
+
+@app.route('/api/users/<id_user>/devices/<id_device>/actors', methods=['POST'])
+@jwt_required()
+def add_actor(id_user, id_device):
+    if is_token_stolen(id_user):
+        return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
+
+    return routes.actor_routes.add_actor(id_user, id_device, request.get_json())
+
+
+@app.route('/api/users/<id_user>/actors', methods=['GET'])
+@jwt_required()
+def get_user_actors(id_user):
+    if is_token_stolen(id_user):
+        return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
+
+    return routes.actor_routes.get_user_actors(id_user)
+
+
+@app.route('/api/users/<id_user>/devices/<id_device>/actors', methods=['GET'])
+@jwt_required()
+def get_device_actors(id_device, id_user):
+    if is_token_stolen(id_user):
+        return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
+
+    return routes.actor_routes.get_device_actors(id_device, id_user)
+
+
+@app.route('/api/users/<id_user>/devices/<id_device>/actors/<id>', methods=['PUT'])
+@jwt_required()
+def update_actor(id_user, id_device, id):
+    if is_token_stolen(id_user):
+        return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
+
+    return routes.actor_routes.update_actor(id_user, id_device, id)
+
+
+@app.route('/api/users/<id_user>/devices/<id_device>/actors/<id>', methods=['DELETE'])
+@jwt_required()
+def delete_actor(id_user, id_device, id):
+    if is_token_stolen(id_user):
+        return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
+
+    return routes.actor_routes.delete_actor(id_user, id_device, id)
 
 
 # #################################################################################################

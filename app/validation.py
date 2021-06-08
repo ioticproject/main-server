@@ -128,12 +128,12 @@ def check_sensor_post(body, id_user, id_device):
 
     if not isinstance(body.get('type'), str):
         return str({'error': 'The type is invalid'}), HTTPStatus.BAD_REQUEST
-
-    if not body.get('measure_unit'):
-        return str({'error': 'The measurement unit is missing'}), HTTPStatus.BAD_REQUEST
-
-    if not isinstance(body.get('measure_unit'), str):
-        return str({'error': 'The measurement unit is invalid'}), HTTPStatus.BAD_REQUEST
+    #
+    # if not body.get('measure_unit'):
+    #     return str({'error': 'The measurement unit is missing'}), HTTPStatus.BAD_REQUEST
+    #
+    # if not isinstance(body.get('measure_unit'), str):
+    #     return str({'error': 'The measurement unit is invalid'}), HTTPStatus.BAD_REQUEST
 
     if not body.get('id_user'):
         return str({'error': 'The user id is missing'}), HTTPStatus.BAD_REQUEST
@@ -173,18 +173,15 @@ def check_sensor_put(body, id, id_user, id_device):
 
     if type:
         return str({'error': 'The sensor type can not be changed'}), HTTPStatus.BAD_REQUEST
-
-    if measure_unit and not isinstance(measure_unit, str):
-        return str({'error': 'The measurement unit is invalid'}), HTTPStatus.BAD_REQUEST
+    #
+    # if measure_unit and not isinstance(measure_unit, str):
+    #     return str({'error': 'The measurement unit is invalid'}), HTTPStatus.BAD_REQUEST
 
     if id_device and not device_id_exists(id_device, id_user):
         return str({'error': 'Invalid device id'}), HTTPStatus.BAD_REQUEST
 
     if id_user and not user_id_exists(id_user):
-        return str({'error': 'Invalid user id'}), HTTPStatus.BAD_REQUEST
-
-    if not set([k for k, _ in body.items()]).issubset(set(['id', 'id_device', 'measure_unit', 'id_user', 'type', 'timestamp'])):
-        return str({'error': 'One or more of the fields are invalid'}), HTTPStatus.BAD_REQUEST
+        return str({'error': 'Invalid user id'}), HTTtatus.BAD_REQUEST
 
     return None
 
