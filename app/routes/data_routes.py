@@ -7,6 +7,7 @@ from clients.http_client import Client
 
 sys.path.append('..\\')
 from models.data import Data
+from models.notification import Notification
 from utils import (check_data,
                    check_date,
                    data_id_exists,
@@ -70,12 +71,17 @@ def add_data(id_sensor, body, id_user, id_device):
 
     if resp:
         return resp
+    # import ipdb; ipdb.set_trace()
 
     body["id"] = get_new_id()
     if "timestamp" in body.keys():
         time = body["timestamp"]
         body.update({"timestamp": datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')})
     data = Data(**body).save()
+
+    if body['value'] < 10:
+        json = {"id": get_new_id(), "id_user": id_user, "id_sensor": id_sensor, "message": "The value received from sensor " + id_sensor, "severity": "error"}
+        Notification(**json).save()
 
     id = data.id
     return {'_id': str(id)}, HTTPStatus.CREATED

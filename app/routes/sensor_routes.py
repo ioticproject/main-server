@@ -78,7 +78,7 @@ def add_sensor(id_user, id_device, body):
 
 def update_sensor(id_user, id_device, id):
     body = request.get_json()
-    resp = check_sensor_put(body, id,  id_user, id_device)
+    resp = check_sensor_put(body, id, id_user, id_device)
 
     if resp:
         return resp

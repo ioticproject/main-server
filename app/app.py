@@ -19,6 +19,7 @@ import routes.user_routes
 import routes.iot_routes
 import routes.notifications
 import routes.messages_routes
+import routes.notifications_routes
 import time
 
 
@@ -126,6 +127,10 @@ app.config['MONGODB_SETTINGS'] = [
         'ALIAS': 'messages-db-alias',
         'host': DB_URL + "/messages" + AUTH_SOURCE
     },
+    {
+        'ALIAS': 'notifications-db-alias',
+        'host': DB_URL + "/notifications" + AUTH_SOURCE
+    }
 ]
 
 initialize_db(app)
@@ -346,6 +351,7 @@ def get_device_sensors(id_device, id_user):
 @app.route('/api/users/<id_user>/devices/<id_device>/sensors/<id>', methods=['PUT'])
 @jwt_required()
 def update_sensor(id_user, id_device, id):
+    # import ipdb; ipdb.set_trace()
     if is_token_stolen(id_user):
         return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
 
@@ -536,8 +542,33 @@ def faq_message(id):
 def get_faq_messages():
     return routes.messages_routes.get_faq_messages()
 
+# ##############################  NOTIFICATIONS  ##################################
+# @app.route('/api/notifications', methods=['POST'])
+# def add_notification():
+#     return routes.notifications_routes.add_notification()
+
+
+@app.route('/api/users/<id>/notifications', methods=['GET'])
+@jwt_required()
+def get_user_notifications(id):
+    ret = is_token_stolen(id)
+    if ret:
+        return ret
+
+    return routes.notifications_routes.get_user_notifications(id)
+
+@app.route('/api/users/<id>/notifications', methods=['DELETE'])
+@jwt_required()
+def delete_user_notifications(id):
+    ret = is_token_stolen(id)
+    if ret:
+        return ret
+
+    return routes.notifications_routes.delete_user_notifications(id)
+
 
 if __name__ == '__main__':
     ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
     ENVIRONMENT_PORT = os.environ.get("APP_PORT", 5000)
+    # app.run(host='0.0.0.0', port=5000, debug=False, ssl_context='adhoc')
     app.run(host='0.0.0.0', port=5000, debug=False)
