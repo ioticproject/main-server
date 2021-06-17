@@ -7,6 +7,8 @@ from clients.http_client import Client
 
 sys.path.append('..\\')
 from models.data import Data
+from models.sensor import Sensor
+from models.user import User
 from models.notification import Notification
 from utils import (check_data,
                    check_date,
@@ -15,6 +17,7 @@ from utils import (check_data,
                    sensor_id_exists,
                    format_timestamp)
 from validation import check_data_post
+from send_email.email_notification import send_notification_email
 
 
 def get_data():
@@ -71,7 +74,6 @@ def add_data(id_sensor, body, id_user, id_device):
 
     if resp:
         return resp
-    # import ipdb; ipdb.set_trace()
 
     body["id"] = get_new_id()
     if "timestamp" in body.keys():
@@ -79,9 +81,33 @@ def add_data(id_sensor, body, id_user, id_device):
         body.update({"timestamp": datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')})
     data = Data(**body).save()
 
-    if body['value'] < 10:
-        json = {"id": get_new_id(), "id_user": id_user, "id_sensor": id_sensor, "message": "The value received from sensor " + id_sensor, "severity": "error"}
-        Notification(**json).save()
+    sensor = Sensor.objects.filter(id=id_sensor).get(0)
+
+    if sensor.webNotifications:
+        user = User.objects.filter(id=id_user).get(0)
+
+        if body['value'] < sensor.min_val:
+            message = "[SENSOR \"" + sensor.name + "\"] Received value " + str(body["value"]) + " (MIN val = " + str(sensor.min_val) + ' ' + sensor.measure_unit + ")"
+            severity = "error"
+            json = {"id": get_new_id(),
+                    "id_user": id_user,
+                    "id_sensor": id_sensor,
+                    "message": message,
+                    "severity": severity}
+            Notification(**json).save()
+            if sensor.emailNotifications:
+                send_notification_email(user.email, message, severity)
+        elif body['value'] > sensor.max_val:
+            message = "[SENSOR \"" + sensor.name + "\"] Received value " + str(body["value"]) + " (MAX val = " + str(sensor.min_val) + ' ' + sensor.measure_unit + ")"
+            severity = "error"
+            json = {"id": get_new_id(),
+                    "id_user": id_user,
+                    "id_sensor": id_sensor,
+                    "message": message,
+                    "severity": severity}
+            Notification(**json).save()
+            if sensor.emailNotifications:
+                send_notification_email(user.email, message, severity)
 
     id = data.id
     return {'_id': str(id)}, HTTPStatus.CREATED

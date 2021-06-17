@@ -13,7 +13,7 @@ from utils import (device_id_exists,
                    user_id_exists,
                    format_timestamp)
 from validation import check_sensor_post, check_sensor_put
-from routes.data_routes import delete_data
+# from routes.data_routes import delete_data
 
 
 def get_sensor(id):
@@ -91,9 +91,9 @@ def delete_sensor(id_user, id_device, id):
     if not sensor_id_exists(id, id_user, id_device):
         return {'error': 'Sensor id not found'}, HTTPStatus.NOT_FOUND
 
-    data = Data.objects.filter(id_sensor=id)
-    for d in data:
-        delete_data(d.id)
+    # data = Data.objects.filter(id_sensor=id)
+    # for d in data:
+    #     delete_data(d.id)
 
     Sensor.objects.get(id=id).delete()
     return '', HTTPStatus.OK

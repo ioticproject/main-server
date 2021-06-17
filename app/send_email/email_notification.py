@@ -77,3 +77,25 @@ def send_reset_password_email(dest_email, dest_name, resetPasswordCode):
                 dest_email,
                 msg.as_string().replace('{username}', dest_name).replace('{resetPasswordCode}', resetPasswordCode).replace('{ip}', host).replace('{port}', '5000'))
     smtp.quit()
+
+
+def send_notification_email(dest_email, message, severity):
+    smtp = smtplib.SMTP('smtp-mail.outlook.com', port=str(os.environ.get("SMTP_PORT")))
+
+    smtp.ehlo()
+    smtp.starttls()
+
+    smtp.login("iotic.team@outlook.com", os.environ.get("PASSWORD_EMAIL"))
+
+    html = open("send_email/email_notifications_template.html", "r").read()
+    part = MIMEText(html, "html")
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = "[IoTIC] Notification - " + severity.upper()
+    msg.attach(part)
+
+    host = os.environ["IP"]
+
+    smtp.sendmail('iotic.team@outlook.com',
+                dest_email,
+                msg.as_string().replace('{message}', message))
+    smtp.quit()
