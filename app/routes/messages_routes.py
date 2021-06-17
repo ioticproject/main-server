@@ -41,7 +41,8 @@ def edit_message(id):
     body = request.get_json()
     body['read'] = True
 
-    message = Message.objects.get(id=id).update(**body)
+    message = Message.objects.get(id=id)
+    message.update(**body)
     user = User.objects().filter(name=message.username)[0]
 
     msg = "You received a new message from the support service."
