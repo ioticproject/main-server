@@ -4,8 +4,11 @@ import datetime
 from flask import request
 
 sys.path.append('..\\')
+from models.user import User
 from models.data import Data
 from models.sensor import Sensor
+from models.notification import Notification
+
 from utils import (device_id_exists,
                    get_new_id,
                    sensor_id_exists,
@@ -13,6 +16,8 @@ from utils import (device_id_exists,
                    user_id_exists,
                    format_timestamp)
 from validation import check_sensor_post, check_sensor_put
+from send_email.email_notification import send_notification_email
+
 # from routes.data_routes import delete_data
 
 
@@ -71,6 +76,16 @@ def add_sensor(id_user, id_device, body):
         time = body["timestamp"]
         body.update({"timestamp": datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')})
     sensor = Sensor(**body).save()
+    user = User.objects.filter(id=id_user)[0]
+
+    message = "[SENSOR \"" + sensor.name + "\"] Successfully added a new sensor."
+    json = {"id": get_new_id(),
+            "id_user": id_user,
+            "id_sensor": "None",
+            "message": message,
+            "severity": 'success'}
+    Notification(**json).save()
+    send_notification_email(user.email, message, 'success')
 
     id = sensor.id
     return {'_id': str(id)}, HTTPStatus.CREATED

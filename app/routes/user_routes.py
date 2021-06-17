@@ -13,6 +13,7 @@ from clients.http_client import Client
 from models.firebaseToken import FirebaseToken
 from models.device import Device
 from models.sensor import Sensor
+from models.notification import Notification
 from models.user import User
 from security.security import encode_password, encode_reset_password_code
 from utils import get_new_id, user_id_exists, format_timestamp, get_new_reset_password_code
@@ -67,7 +68,14 @@ def login_user():
         'email': user.email,
         '_id': user.id,
         'access_token': access_token,
-        'role': user.role}, HTTPStatus.CREATED
+        'role': user.role,
+        'firstName': user.firstName,
+        'lastName': user.lastName,
+        'address': user.address,
+        'city': user.city,
+        'state': user.state,
+        'zipCode': user.zipCode,
+        'country': user.country}, HTTPStatus.CREATED
 
 def login_user_with_google():
     access_token = request.get_json().get('access_token')
@@ -100,7 +108,14 @@ def login_user_with_google():
         'email': user.email,
         '_id': user.id,
         'access_token': access_token,
-        'role': user.role}, HTTPStatus.CREATED
+        'role': user.role,
+        'firstName': user.firstName,
+        'lastName': user.lastName,
+        'address': user.address,
+        'city': user.city,
+        'state': user.state,
+        'zipCode': user.zipCode,
+        'country': user.country}, HTTPStatus.CREATED
 
 def add_user():
     body = request.get_json()
@@ -212,16 +227,27 @@ def get_user(id):
 
 def update_user(id):
     body = request.get_json()
-    resp = check_user_put(body, id)
+    # resp = check_user_put(body, id)
+    # import ipdb; ipdb.set_trace()
 
-    if resp:
-        return resp
+    # if resp:
+    #     return resp
 
     password = body.get('password')
-    del body["password"]
-    body["password"] = encode_password(password)
+    if password:
+        del body["password"]
+        body["password"] = encode_password(password)
 
-    User.objects.get(id=id).update(**body)
+    user = User.objects.get(id=id).update(**body)
+
+    message = "Your personal information have been updated."
+    json = {"id": get_new_id(),
+            "id_user": id,
+            "id_sensor": "None",
+            "message": message,
+            "severity": 'info'}
+    Notification(**json).save()
+
     return '', HTTPStatus.OK
 
 

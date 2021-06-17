@@ -86,28 +86,29 @@ def add_data(id_sensor, body, id_user, id_device):
     if sensor.webNotifications:
         user = User.objects.filter(id=id_user).get(0)
 
-        if body['value'] < sensor.min_val:
-            message = "[SENSOR \"" + sensor.name + "\"] Received value " + str(body["value"]) + " (MIN val = " + str(sensor.min_val) + ' ' + sensor.measure_unit + ")"
-            severity = "error"
-            json = {"id": get_new_id(),
-                    "id_user": id_user,
-                    "id_sensor": id_sensor,
-                    "message": message,
-                    "severity": severity}
-            Notification(**json).save()
-            if sensor.emailNotifications:
-                send_notification_email(user.email, message, severity)
-        elif body['value'] > sensor.max_val:
-            message = "[SENSOR \"" + sensor.name + "\"] Received value " + str(body["value"]) + " (MAX val = " + str(sensor.min_val) + ' ' + sensor.measure_unit + ")"
-            severity = "error"
-            json = {"id": get_new_id(),
-                    "id_user": id_user,
-                    "id_sensor": id_sensor,
-                    "message": message,
-                    "severity": severity}
-            Notification(**json).save()
-            if sensor.emailNotifications:
-                send_notification_email(user.email, message, severity)
+        if sensor.min_val and sensor.max_val:
+            if body['value'] < sensor.min_val:
+                message = "[SENSOR \"" + sensor.name + "\"] Received value " + str(body["value"]) + " (MIN val = " + str(sensor.min_val) + ' ' + sensor.measure_unit + ")"
+                severity = "error"
+                json = {"id": get_new_id(),
+                        "id_user": id_user,
+                        "id_sensor": id_sensor,
+                        "message": message,
+                        "severity": severity}
+                Notification(**json).save()
+                if sensor.emailNotifications:
+                    send_notification_email(user.email, message, severity)
+            elif body['value'] > sensor.max_val:
+                message = "[SENSOR \"" + sensor.name + "\"] Received value " + str(body["value"]) + " (MAX val = " + str(sensor.min_val) + ' ' + sensor.measure_unit + ")"
+                severity = "error"
+                json = {"id": get_new_id(),
+                        "id_user": id_user,
+                        "id_sensor": id_sensor,
+                        "message": message,
+                        "severity": severity}
+                Notification(**json).save()
+                if sensor.emailNotifications:
+                    send_notification_email(user.email, message, severity)
 
     id = data.id
     return {'_id': str(id)}, HTTPStatus.CREATED

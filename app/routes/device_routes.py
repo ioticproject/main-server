@@ -9,6 +9,7 @@ from models.device import Device
 from models.sensor import Sensor
 from models.actor import Actor
 from models.user import User
+from models.notification import Notification
 from utils import (device_id_exists,
                    get_new_id,
                    get_new_device_api_key,
@@ -16,6 +17,7 @@ from utils import (device_id_exists,
                    format_timestamp)
 from validation import check_device_post, check_device_put
 from routes.sensor_routes import delete_sensor
+from send_email.email_notification import send_notification_email
 
 
 def get_device(id):
@@ -73,6 +75,16 @@ def add_device(id_user):
 
     body['apiKey'] = get_new_device_api_key()
     device = Device(**body).save()
+    user = User.objects.filter(id=id_user)[0]
+
+    message = "[DEVICE \"" + device.name + "\"] Successfully paired a new device."
+    json = {"id": get_new_id(),
+            "id_user": id_user,
+            "id_sensor": "None",
+            "message": message,
+            "severity": 'success'}
+    Notification(**json).save()
+    send_notification_email(user.email, message, 'success')
 
     id = device.id
     return {'_id': str(id), 'apiKey': device.apiKey}, HTTPStatus.CREATED

@@ -351,7 +351,6 @@ def get_device_sensors(id_device, id_user):
 @app.route('/api/users/<id_user>/devices/<id_device>/sensors/<id>', methods=['PUT'])
 @jwt_required()
 def update_sensor(id_user, id_device, id):
-    # import ipdb; ipdb.set_trace()
     if is_token_stolen(id_user):
         return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
 
