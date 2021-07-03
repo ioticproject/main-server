@@ -72,11 +72,16 @@ def add_sensor(id_user, id_device, body):
     if not body.get('id'):
         body["id"] = get_new_id()
 
+    print("here1")
+
     if "timestamp" in body.keys():
         time = body["timestamp"]
         body.update({"timestamp": datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')})
     sensor = Sensor(**body).save()
     user = User.objects.filter(id=id_user)[0]
+
+
+    print("here2")
 
     message = "[SENSOR \"" + sensor.name + "\"] Successfully added a new sensor."
     json = {"id": get_new_id(),
@@ -85,7 +90,10 @@ def add_sensor(id_user, id_device, body):
             "message": message,
             "severity": 'success'}
     Notification(**json).save()
-    send_notification_email(user.email, message, 'success')
+
+    # send_notification_email(user.email, message, 'success')
+
+    print("here3")
 
     id = sensor.id
     return {'_id': str(id)}, HTTPStatus.CREATED

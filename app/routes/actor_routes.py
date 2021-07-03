@@ -68,6 +68,9 @@ def add_actor(id_user, id_device, body):
     # if resp:
     #     return resp
 
+    body["id_user"] = id_user
+    body["id_device"] = id_device
+
     if not body.get('id'):
         body["id"] = get_new_id()
 
@@ -84,7 +87,7 @@ def add_actor(id_user, id_device, body):
             "message": message,
             "severity": 'success'}
     Notification(**json).save()
-    send_notification_email(user.email, message, 'success')
+    # send_notification_email(user.email, message, 'success')
 
     id = actor.id
     return {'_id': str(id)}, HTTPStatus.CREATED

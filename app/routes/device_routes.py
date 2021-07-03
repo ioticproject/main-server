@@ -17,7 +17,6 @@ from utils import (device_id_exists,
                    format_timestamp)
 from validation import check_device_post, check_device_put
 from routes.sensor_routes import delete_sensor
-from send_email.email_notification import send_notification_email
 
 
 def get_device(id):
@@ -43,6 +42,25 @@ def get_device(id):
     return ret, HTTPStatus.OK
 
 
+def get_device_by_token(token):
+    devices = Device.objects.filter(apiKey=token)
+
+    if len(devices) == 0:
+        return {'error': "The device apiKey does not exist."}, HTTPStatus.NOT_FOUND
+
+    device = devices.get(0)
+
+    ret = {
+        '_id': device.id,
+        'name': device.name,
+        'description': device.description,
+        'id_user': device.id_user,
+        'timestamp': device.timestamp,
+        }
+
+    return ret, HTTPStatus.OK
+
+
 def get_user_devices(id_user):
     if not user_id_exists(id_user):
         return {'error': "The user id does not exist."}, HTTPStatus.NOT_FOUND
@@ -53,9 +71,7 @@ def get_user_devices(id_user):
 
 def get_devices():
     devices = Device.objects()
-
     return {'devices': format_timestamp(devices)}, HTTPStatus.OK
-
 
 
 def add_device(id_user):
@@ -84,7 +100,7 @@ def add_device(id_user):
             "message": message,
             "severity": 'success'}
     Notification(**json).save()
-    send_notification_email(user.email, message, 'success')
+    # send_notification_email(user.email, message, 'success')
 
     id = device.id
     return {'_id': str(id), 'apiKey': device.apiKey}, HTTPStatus.CREATED

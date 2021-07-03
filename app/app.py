@@ -36,7 +36,8 @@ from security.security import (
 from clients.pub_sub_client import (PubSubClient, PubSubAuth)
 
 
-auth = PubSubAuth("secret")
+auth = None
+# auth = PubSubAuth("secret")
 #
 # auth.grantSubscribe({
 #     "token": "secret_token",
@@ -48,10 +49,7 @@ auth = PubSubAuth("secret")
 #             "pattern": "5c19a5a2fcd64e2a9401225b61596b3d.85b4dbc8e1b44cd4b9a2e6aaeb26e851.*"
 #         })
 
-# client = PubSubClient("secret_token", routes.iot_routes.recvData)
-# time.sleep(1)
-#
-# client.subscribe("*")
+client = PubSubClient("main_tokens", routes.iot_routes.recv_data)
 
 
 class CustomJSONEncoder(JSONEncoder):
@@ -254,6 +252,14 @@ def get_device(id_user, id):
     if is_token_stolen(id_user):
         return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
     return routes.device_routes.get_device(id)
+
+
+@app.route('/api/users/<id_user>/device_by_token/<token>', methods=['GET'])
+# @jwt_required()
+def get_device_by_token(id_user, token):
+    # if is_token_stolen(id_user):
+    #     return {"error": "The authorization token does not belong to you."}, HTTPStatus.UNAUTHORIZED
+    return routes.device_routes.get_device_by_token(token)
 
 
 @app.route('/api/devices', methods=['GET'])
